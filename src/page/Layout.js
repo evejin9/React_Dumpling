@@ -2,51 +2,78 @@ import React from 'react';
 import { Outlet } from 'react-router-dom';
 import styled from "styled-components";
 
-const Header = styled.div`
+const LayoutWrapper = styled.div`
   width: 100%;
-  background-color: #fff;
 
-  nav {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  li {
+    padding: 20px;
+
+    &:hover {
+      color: red;
+    }
   }
+  
+  li + li {
+    margin-left: 20px;
+  }
+`;
 
+
+const Header = styled.header`
+  background-color: #e7e7e7;
+  padding: 20px;
+  
   .main-menu {
     display: flex;
     justify-content: center;
     align-items: center;
   }
+`;
 
-  li + li {
-    padding-left: 20px;
+const Title = styled.div`
+  padding: 10px 20px;
+`;
+
+const Nav = styled.nav`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* flex: 1; */
+`;
+
+const Footer = styled.footer`
+  background-color: #e7e7e7;
+  padding: 20px;
+
+  .footer-menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 `;
 
-const Footer = styled.div`
-`;
 
 function Layout(props) {
   return (
-    <>
+    <LayoutWrapper>
       <Header>
-        <nav>
-          <div>좋아할 만두</div>
-          <ul className='main-menu cu'>
+        <Nav>
+          <Title>좋아할 만두</Title>
+          <ul className='main-menu cursor-pointer'>
             <li>NEW</li>
             <li>BEST</li>
             <li>MAP</li>
             <li>PRODUCT REVIEW</li>
             <li>ADD</li>
           </ul>
-        </nav>
+        </Nav>
       </Header>
 
       <Outlet />
 
       <Footer>
-        <h2>좋아할 만두</h2>
-        <ul>
+        <Title>좋아할 만두</Title>
+        <ul className='footer-menu cursor-pointer'>
           <li>회사 소개</li>
           <li>서비스 소개</li>
           <li>개인정보처리방침</li>
@@ -54,7 +81,7 @@ function Layout(props) {
           <li>공지사항</li>
         </ul>
       </Footer>
-    </>
+    </LayoutWrapper>
   );
 }
 
