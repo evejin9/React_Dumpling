@@ -4,6 +4,7 @@ import styled from "styled-components";
 
 const LayoutWrapper = styled.div`
   width: 100%;
+  word-break: keep-all;
 
   li {
     padding: 20px;
@@ -21,7 +22,6 @@ const LayoutWrapper = styled.div`
 
 const Header = styled.header`
   background-color: #e7e7e7;
-  padding: 20px;
   
   .main-menu {
     display: flex;
