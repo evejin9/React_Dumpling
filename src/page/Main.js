@@ -1,10 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
+import YouTube from "react-youtube";
+import { useEffect } from 'react';
 
 import dumplingBg from '../image/dumpling_bg.jpg';
 import searchStoreBg from '../image/search-view_bg.jpg';
 import Search from '../components/ui/Search';
 import Button from '../components/ui/Button';
+
 
 const MainWrapper = styled.div`
   max-width: 1000px;
@@ -80,10 +83,20 @@ const SearchStore = styled.div`
 
 const YoutubeShare = styled.div`
   padding: 30px;
+`;
+
+const NewMap = styled.div`
+  background-color: #F3F7FF;
 
 `;
 
+
 function Main(props) {
+
+  useEffect(() => {
+
+  }, [])
+
   return (
     <MainWrapper>
       <Dumpling>
@@ -93,6 +106,7 @@ function Main(props) {
           <img src={dumplingBg} />
         </div>
       </Dumpling>
+
     <SearchStore>
         <div className='searchStore copyright'>
           <h2>만두를 찾으시나요?</h2>
@@ -100,13 +114,19 @@ function Main(props) {
         </div>
         <Search />
     </SearchStore>
+
     <YoutubeShare>
       <div className='copyright'>
         <h2>여기라면 당신이 좋아할만두..?</h2>
         <p>당신의 최애 맛집을 소개해주세요</p>
-        <Button text={'공유하기'} />
       </div>
+        <Button text={'공유하기'} />
+        <YouTube />
     </YoutubeShare>
+
+    <NewMap>
+
+    </NewMap>
     </MainWrapper>
   );
 }
