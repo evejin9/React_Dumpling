@@ -7,6 +7,9 @@ import dumplingBg from '../image/dumpling_bg.jpg';
 import searchStoreBg from '../image/search-view_bg.jpg';
 import Search from '../components/ui/Search';
 import Button from '../components/ui/Button';
+import { useDispatch } from 'react-redux';
+import { getStores } from '../api/StoreApi';
+import { getStoreData } from '../features/StoreSlice';
 
 
 const MainWrapper = styled.div`
@@ -93,7 +96,17 @@ const NewMap = styled.div`
 
 function Main(props) {
 
+  const dispatch = useDispatch();
+
   useEffect(() => {
+    const handleGetStoreData = async () => {
+      const result = getStores();
+      if (!result) return 
+
+      dispatch(getStoreData(result))
+    }
+
+    handleGetStoreData();
 
   }, [])
 
@@ -121,7 +134,22 @@ function Main(props) {
         <p>당신의 최애 맛집을 소개해주세요</p>
       </div>
         <Button text={'공유하기'} />
-        <YouTube />
+        <YouTube
+          // videoId={'NC1TUOCFChk'}
+          videoId={'PXXkK1aVxrU'}
+          opts={{
+            width: "100%",
+            // height: "100%",
+            playerVars: {
+              autoplay: 1,
+              roop: 1,
+              // modestbranding: 1,
+            },
+          }}
+          onReady={e=> {
+            e.target.mute(); 
+          }}
+        />
     </YoutubeShare>
 
     <NewMap>

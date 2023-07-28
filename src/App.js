@@ -2,7 +2,7 @@ import './App.css';
 import { Route, Routes } from "react-router-dom";
 import styled, { createGlobalStyle } from "styled-components";
 
-import Layout from './page/Layout';
+import Layout from './components/Layout';
 import reset from 'styled-reset';
 import Main from './page/Main';
 
