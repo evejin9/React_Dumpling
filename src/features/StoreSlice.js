@@ -9,11 +9,14 @@ const storeSlice = createSlice({
   initialState,
   reducers: {
     getStoreData: (state, action) => {
-      // state.storeList = action.payload;
-    }
+      state.storeList = action.payload;
+    },
+    
   },
 });
 
 export const { getStoreData } = storeSlice.actions;
+
+export const allStoreList = (state) => state.store.storeList;
 
 export default storeSlice.reducer;

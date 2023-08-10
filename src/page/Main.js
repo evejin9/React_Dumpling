@@ -7,9 +7,9 @@ import dumplingBg from '../image/dumpling_bg.jpg';
 import searchStoreBg from '../image/search-view_bg.jpg';
 import Search from '../components/ui/Search';
 import Button from '../components/ui/Button';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getStores } from '../api/StoreApi';
-import { getStoreData } from '../features/StoreSlice';
+import { getStoreData, storeList } from '../features/StoreSlice';
 
 
 const MainWrapper = styled.div`
@@ -100,7 +100,8 @@ function Main(props) {
 
   useEffect(() => {
     const handleGetStoreData = async () => {
-      const result = getStores();
+      const result = await getStores();
+
       if (!result) return 
 
       dispatch(getStoreData(result))
@@ -142,7 +143,7 @@ function Main(props) {
             // height: "100%",
             playerVars: {
               autoplay: 1,
-              roop: 1,
+              loop: 1,
               // modestbranding: 1,
             },
           }}
