@@ -1,15 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import YouTube from "react-youtube";
 import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import dumplingBg from '../image/dumpling_bg.jpg';
 import searchStoreBg from '../image/search-view_bg.jpg';
 import Search from '../components/ui/Search';
 import Button from '../components/ui/Button';
-import { useDispatch, useSelector } from 'react-redux';
+
 import { getStores } from '../api/StoreApi';
-import { getStoreData, storeList } from '../features/StoreSlice';
+import { allStoreList, getStoreData, storeList } from '../features/StoreSlice';
+
+import NewStoreSwiper from '../components/NewStoreSwiper';
+import BestStoreSwiper from '../components/BestStoreSwiper';
+
 
 
 const MainWrapper = styled.div`
@@ -95,8 +100,11 @@ const NewMap = styled.div`
 
 
 function Main(props) {
+  const [newStoreList, setNewStoreList] = useState([]);
+  const [bestStoreList, setBestStoreList] = useState([]);
 
   const dispatch = useDispatch();
+  const storeList = useSelector(allStoreList);
 
   useEffect(() => {
     const handleGetStoreData = async () => {
@@ -108,8 +116,21 @@ function Main(props) {
     }
 
     handleGetStoreData();
-
   }, [])
+
+  useEffect(() => {
+    const newStore = [...storeList];
+    const newStoreArray = newStore.sort((a, b) => { if (a.date > b.date) return -1; })
+    .slice(0, 4);
+    
+    const bestStore = [...storeList];
+    const bestStoreArray = bestStore.sort((a, b) => { if (a.likeCount > b.likeCount) return -1; })
+    .slice(0, 4);
+
+    setNewStoreList(newStoreArray);
+    setBestStoreList(bestStoreArray);
+
+  }, [storeList])
 
   return (
     <MainWrapper>
@@ -154,8 +175,11 @@ function Main(props) {
     </YoutubeShare>
 
     <NewMap>
-
+      <NewStoreSwiper newStore={newStoreList} />
     </NewMap>
+
+
+      <BestStoreSwiper bestStore={bestStoreList}  />
     </MainWrapper>
   );
 }
