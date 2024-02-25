@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation } from "swiper/modules";
+import { Autoplay, Navigation } from "swiper/modules";
 import styled from 'styled-components';
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 
@@ -52,8 +52,12 @@ function NewStoreSwiper(props) {
     <SwiperStyled>
       <Swiper 
         navigation={true}
-        modules={[Navigation]}
+        modules={[Navigation, Autoplay]}
         className='mySwiper'
+        autoplay={{
+          delay:5000,
+          disableOnInteraction: true,
+        }}
         spaceBetween={50}
         slidesPerView={2}
         // onSlideChange={() => console.log('slide change')}
