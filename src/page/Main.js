@@ -329,7 +329,7 @@ function Main(props) {
     <Delivery>
       <div className='copyright'>
         <h2>혹시 저희가 당신을 배고프게 했나요?</h2>
-        <h3>모두가 좋아할 만두, 바로 여기에 있습니다.</h3>
+        <h3>바로 지금, 당신에게 필요한 배달 서비스</h3>
       </div>
       <div className='deliverImg'>
         <img src={deliveryBM}/>
