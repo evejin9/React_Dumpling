@@ -2,6 +2,8 @@ import React from 'react';
 import { Outlet } from 'react-router-dom';
 import styled from "styled-components";
 
+import { FaTwitter, FaInstagram, FaFacebook  } from "react-icons/fa";
+
 const LayoutWrapper = styled.div`
   width: 100%;
   word-break: keep-all;
@@ -22,6 +24,13 @@ const LayoutWrapper = styled.div`
 
 const Header = styled.header`
   background-color: #e7e7e7;
+  width: 100%;
+  height: 100px;
+
+  display: flex;
+  justify-content: center;
+  justify-content: space-around;
+  align-items: center;
   
   .main-menu {
     display: flex;
@@ -32,6 +41,8 @@ const Header = styled.header`
 
 const Title = styled.div`
   padding: 10px 20px;
+  font-size: 20px;
+  font-weight: 700;
 `;
 
 const Nav = styled.nav`
@@ -42,13 +53,38 @@ const Nav = styled.nav`
 `;
 
 const Footer = styled.footer`
-  background-color: #e7e7e7;
+  background-color: #F3F7FF;
   padding: 20px;
+  font-size: 15px;
 
   .footer-menu {
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+
+  .snsIcons  {
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    li {
+      padding: 12px;
+    }
+
+    svg {
+      width: 25px;
+      height: 25px;
+    }
+  }
+
+  .componyInfo {
+    font-size: 12px;
+  }
+
+  ul + ul {
+    /* margin-top: 10px; */
   }
 `;
 
@@ -80,6 +116,19 @@ function Layout(props) {
           <li>이용약관</li>
           <li>공지사항</li>
         </ul>
+        <ul className='snsIcons cursor-pointer'>
+          <li><FaInstagram/></li>
+          <li><FaFacebook/></li>
+          <li><FaTwitter/></li>
+        </ul>
+        <ul className='footer-menu componyInfo cursor-pointer'>
+          <li>좋아할 만두(주)</li>
+          <li>대표자 김수진</li>
+          <li>인천 남동구 독곡로48번길 9,  6층 (서해빌딩)</li>
+          <li>TEL: 1577-0510</li>
+          <li>EMAIL: eveji9@naver.com</li>
+        </ul>
+        
       </Footer>
     </LayoutWrapper>
   );
