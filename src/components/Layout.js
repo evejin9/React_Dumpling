@@ -1,8 +1,10 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 import styled from "styled-components";
+import dayjs from 'dayjs';
 
 import { FaTwitter, FaInstagram, FaFacebook  } from "react-icons/fa";
+import Button from './ui/Button';
 
 const LayoutWrapper = styled.div`
   width: 100%;
@@ -23,7 +25,7 @@ const LayoutWrapper = styled.div`
 
 
 const Header = styled.header`
-  background-color: #e7e7e7;
+  /* background-color: #e7e7e7; */
   width: 100%;
   height: 100px;
 
@@ -46,10 +48,14 @@ const Title = styled.div`
 `;
 
 const Nav = styled.nav`
+  width: 1000px;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
-  /* flex: 1; */
+
+  ul {
+    flex: 1;
+  }
 `;
 
 const Footer = styled.footer`
@@ -64,7 +70,6 @@ const Footer = styled.footer`
   }
 
   .snsIcons  {
-    
     display: flex;
     justify-content: center;
     align-items: center;
@@ -84,9 +89,15 @@ const Footer = styled.footer`
   }
 
   ul + ul {
-    /* margin-top: 10px; */
+  }
+  
+  p {
+    margin-top: 20px;
+    font-size: 13px;
   }
 `;
+
+const Today = dayjs();
 
 
 function Layout(props) {
@@ -102,6 +113,8 @@ function Layout(props) {
             <li>PRODUCT REVIEW</li>
             <li>ADD</li>
           </ul>
+          <Button text={'Sign In'} />
+          <Button text={'Register'} />
         </Nav>
       </Header>
 
@@ -109,6 +122,7 @@ function Layout(props) {
 
       <Footer>
         <Title>좋아할 만두</Title>
+
         <ul className='footer-menu cursor-pointer'>
           <li>회사 소개</li>
           <li>서비스 소개</li>
@@ -116,11 +130,13 @@ function Layout(props) {
           <li>이용약관</li>
           <li>공지사항</li>
         </ul>
+
         <ul className='snsIcons cursor-pointer'>
           <li><FaInstagram/></li>
           <li><FaFacebook/></li>
           <li><FaTwitter/></li>
         </ul>
+
         <ul className='footer-menu componyInfo cursor-pointer'>
           <li>좋아할 만두(주)</li>
           <li>대표자 김수진</li>
@@ -128,7 +144,11 @@ function Layout(props) {
           <li>TEL: 1577-0510</li>
           <li>EMAIL: eveji9@naver.com</li>
         </ul>
-        
+
+        <p>
+          &copy; {Today.get('y')}&nbsp;
+          Mandu, I Like It. All Rights Reserved.
+        </p>
       </Footer>
     </LayoutWrapper>
   );
