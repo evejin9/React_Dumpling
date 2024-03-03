@@ -266,10 +266,11 @@ function Main(props) {
           videoId={'PXXkK1aVxrU'}
           opts={{
             width: "100%",
-            // height: "100%",
+            height: "500px",
             playerVars: {
               autoplay: 1,
               loop: 1,
+              playlist: 'PXXkK1aVxrU',
               // modestbranding: 1,
             },
           }}
@@ -332,9 +333,9 @@ function Main(props) {
         <h3>바로 지금, 당신에게 필요한 배달 서비스</h3>
       </div>
       <div className='deliverImg'>
-        <img src={deliveryBM}/>
-        <img src={deliveryYGY}/>
-        <img src={deliveryCP}/>
+        <img className='cursor-pointer' src={deliveryBM}/>
+        <img className='cursor-pointer' src={deliveryYGY}/>
+        <img className='cursor-pointer' src={deliveryCP}/>
       </div>
     </Delivery>
 
