@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import styled from "styled-components";
 import dayjs from 'dayjs';
 
 import { FaTwitter, FaInstagram, FaFacebook  } from "react-icons/fa";
+import { IoIosArrowUp } from "react-icons/io";
 import Button from './ui/Button';
+import logoImg from "../image/Title.png";
 
 const LayoutWrapper = styled.div`
   width: 100%;
@@ -43,8 +45,10 @@ const Header = styled.header`
 
 const Title = styled.div`
   padding: 10px 20px;
-  font-size: 20px;
-  font-weight: 700;
+
+  img {
+    width: 160px;
+  };
 `;
 
 const Nav = styled.nav`
@@ -97,15 +101,64 @@ const Footer = styled.footer`
   }
 `;
 
+const BackToTopBtn = styled.div`
+  display: ${props => props.ShowButton ? '' : 'none'};
+  width: 50px;
+  height: 50px;
+  position: fixed;
+  bottom: 50px;
+  right: 50px;
+  color: #5A80C9;
+  border: 3px solid #5A80C9;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.9);
+
+  svg {
+    font-size:25px;
+    margin: 9px;
+  }
+
+  &:hover {
+  background-color: #5A80C9;
+  color: #fff;
+  border: 3px solid #fff;
+  }
+`;
+
 const Today = dayjs();
 
-
 function Layout(props) {
+  const [ShowButton, setShowButton] = useState(false);
+
+  const MoveToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  useEffect(() => {
+    const showButtonClick = () => {
+      if (window.scrollY > 800) {
+        setShowButton(true)
+      } else {
+        setShowButton(false)
+      }
+    }
+    window.addEventListener("scroll", showButtonClick)
+    return () => {
+      window.removeEventListener("scroll", showButtonClick)
+    }
+  }, [])
+
   return (
     <LayoutWrapper>
       <Header>
         <Nav>
-          <Title>좋아할 만두</Title>
+          <Title> 
+            <img
+              className='cursor-pointer'
+              src={logoImg}
+            /> 
+          </Title>
+
           <ul className='main-menu cursor-pointer'>
             <li>NEW</li>
             <li>BEST</li>
@@ -114,7 +167,7 @@ function Layout(props) {
             <li>ADD</li>
           </ul>
           <Button text={'Sign In'} />
-          <Button text={'Register'} />
+          {/* <Button text={'Register'} /> */}
         </Nav>
       </Header>
 
@@ -150,6 +203,14 @@ function Layout(props) {
           Mandu, I Like It. All Rights Reserved.
         </p>
       </Footer>
+
+      <BackToTopBtn 
+        className='cursor-pointer'
+        onClick={MoveToTop}
+        ShowButton={ShowButton}
+      >
+        <IoIosArrowUp />
+      </BackToTopBtn>
     </LayoutWrapper>
   );
 }
