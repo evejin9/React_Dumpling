@@ -24,9 +24,11 @@ const Btn = styled.button`
 function Button(props) {
   const { text } = props;
   return (
-    <Btn className='cursor-pointer'>
-      {text}
-    </Btn>
+    <div>
+      <Btn className='cursor-pointer'>
+        {text}
+      </Btn>
+    </div>
   );
 }
 

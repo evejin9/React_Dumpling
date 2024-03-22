@@ -3,8 +3,8 @@ import { Outlet } from 'react-router-dom';
 import styled from "styled-components";
 import dayjs from 'dayjs';
 
-import { FaTwitter, FaInstagram, FaFacebook  } from "react-icons/fa";
-import { IoIosArrowUp } from "react-icons/io";
+import { FaTwitter, FaInstagram, FaFacebook, FaBookmark } from "react-icons/fa";
+import { IoIosArrowUp, IoMdClose } from "react-icons/io";
 import Button from './ui/Button';
 import logoImg from "../image/Title.png";
 
@@ -125,14 +125,85 @@ const BackToTopBtn = styled.div`
   }
 `;
 
+const FavoriteBtn = styled.div`
+  width: 50px;
+  height: 100px;
+  /* background-color: #b8c7ff; */
+  background-color: #fff;
+  border: 3px solid #7894FF;
+  border-radius: 10px;
+  position: fixed;
+  bottom: 200px;
+  right: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  svg {
+    /* color: #fff; */
+    color: #4c6eac9d;
+    font-size: 23px;
+  }
+
+  &:hover {
+    /* background-color: #fff; */
+    background-color: #b8c7ff;
+    border: 3px solid #ADB1FF;
+
+    svg {
+      /* color: #4c6eac9d; */
+      color: #fff;
+    }
+  }
+`;
+
+const FavoriteModal = styled.div`
+  display: ${props => props.ShowModal ? 'block' : 'none'};
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  z-index: 10;
+  background-color: #4949496b;
+
+  .favoriteBg {
+    width: 500px;
+    height: 500px;
+    background-color: #fff;
+    border: 5px solid #7894FF;
+    border-radius: 10px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+
+    .closeBtn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 30px;
+      color: #5A80C9;
+    }
+  }
+`;
+
 const Today = dayjs();
 
 function Layout(props) {
   const [ShowButton, setShowButton] = useState(false);
+  const [ShowModal, setShowModal] = useState(false);
 
   const MoveToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+
+  const clickModal = () => {
+    setShowModal(!ShowModal);
+
+    console.log(ShowModal);
+  }
 
   useEffect(() => {
     const showButtonClick = () => {
@@ -203,6 +274,24 @@ function Layout(props) {
           Mandu, I Like It. All Rights Reserved.
         </p>
       </Footer>
+
+      <FavoriteBtn
+        className='cursor-pointer'
+        onClick={clickModal}
+      >
+        <FaBookmark />
+      </FavoriteBtn>
+
+      <FavoriteModal
+        ShowModal={ShowModal}
+      >
+        <div className='favoriteBg'>
+          <IoMdClose 
+            className='closeBtn cursor-pointer'
+            onClick={clickModal}
+          />
+        </div>
+      </FavoriteModal>
 
       <BackToTopBtn 
         className='cursor-pointer'
