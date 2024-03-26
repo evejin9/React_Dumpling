@@ -7,6 +7,9 @@ import { FaTwitter, FaInstagram, FaFacebook, FaBookmark } from "react-icons/fa";
 import { IoIosArrowUp, IoMdClose } from "react-icons/io";
 import Button from './ui/Button';
 import logoImg from "../image/Title.png";
+import StoreItem from './ui/StoreItem';
+import { allStoreList, getStoreData } from '../features/StoreSlice';
+import { useSelector } from 'react-redux';
 
 const LayoutWrapper = styled.div`
   width: 100%;
@@ -112,6 +115,8 @@ const BackToTopBtn = styled.div`
   border: 3px solid #5A80C9;
   border-radius: 10px;
   background-color: rgba(255, 255, 255, 0.9);
+  z-index: 9;
+
 
   svg {
     font-size:25px;
@@ -138,6 +143,7 @@ const FavoriteBtn = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 9;
 
   svg {
     /* color: #fff; */
@@ -167,8 +173,8 @@ const FavoriteModal = styled.div`
   background-color: #4949496b;
 
   .favoriteBg {
-    width: 500px;
-    height: 500px;
+    width: 600px;
+    height: 600px;
     background-color: #fff;
     border: 5px solid #7894FF;
     border-radius: 10px;
@@ -178,13 +184,41 @@ const FavoriteModal = styled.div`
     top: 0;
     bottom: 0;
     margin: auto;
-
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
     .closeBtn {
       position: absolute;
       top: 20px;
       right: 20px;
       font-size: 30px;
       color: #5A80C9;
+    }
+    
+    .favoriteText {
+      h2 {
+        color: #5A80C9;
+        font-size: 35px;
+        font-weight: 600;
+        padding: 50px 0;
+      }
+      
+      p {
+        font-size: 18px;
+        padding: 0 0 50px 0;
+      }
+    }
+    
+    .favotiteList {
+      padding: 0 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      overflow: auto;
     }
   }
 `;
@@ -195,14 +229,14 @@ function Layout(props) {
   const [ShowButton, setShowButton] = useState(false);
   const [ShowModal, setShowModal] = useState(false);
 
+  const storeList = useSelector(allStoreList);
+
   const MoveToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const clickModal = () => {
     setShowModal(!ShowModal);
-
-    console.log(ShowModal);
   }
 
   useEffect(() => {
@@ -290,6 +324,21 @@ function Layout(props) {
             className='closeBtn cursor-pointer'
             onClick={clickModal}
           />
+
+          <div className='favoriteText'>
+            <h2>내가 좋아할 만두</h2>
+            <p>당신이 찜한 만두를 여기에 모았습니다.</p>
+          </div>
+
+          <div className='favotiteList'>
+            {
+              storeList.map((store) => {
+                if (store.favorite) {
+                  return <StoreItem key={store.id} storeImg={store.imagePath} storeTitle={store.title} storeFavorite={store.favorite} store={store} />
+                }
+              })
+            }
+          </div>
         </div>
       </FavoriteModal>
 
