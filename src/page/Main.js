@@ -68,7 +68,7 @@ const MainWrapper = styled.div`
 
 const Dumpling = styled.section`
   color: #fff;
-  padding: 30px;
+  padding: 130px 30px 30px 30px;
   background-color: #000;
 
   .copyright h2 {

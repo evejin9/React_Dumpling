@@ -30,9 +30,11 @@ const LayoutWrapper = styled.div`
 
 
 const Header = styled.header`
-  /* background-color: #e7e7e7; */
+  background-color: #fff;
   width: 100%;
   height: 100px;
+  position: fixed;
+  z-index: 20;
 
   display: flex;
   justify-content: center;
@@ -265,12 +267,14 @@ function Layout(props) {
           </Title>
 
           <ul className='main-menu cursor-pointer'>
-            <li>NEW</li>
-            <li>BEST</li>
+            {/* <li>NEW</li> */}
+            {/* <li>BEST</li> */}
             <li>MAP</li>
             <li>PRODUCT REVIEW</li>
-            <li>ADD</li>
+            {/* <li>ADD</li> */}
           </ul>
+
+          <Button addBtn={'addBtn'} text={'ADD'} />
           <Button text={'Sign In'} />
           {/* <Button text={'Register'} /> */}
         </Nav>
@@ -334,7 +338,7 @@ function Layout(props) {
             {
               storeList.map((store) => {
                 if (store.favorite) {
-                  return <StoreItem key={store.id} storeImg={store.imagePath} storeTitle={store.title} storeFavorite={store.favorite} store={store} />
+                  return <StoreItem key={store.id} storeImg={store.imagePath} storeTitle={store.title} storeFavorite={store.favorite} storeLocal={store.local} store={store} />
                 }
               })
             }

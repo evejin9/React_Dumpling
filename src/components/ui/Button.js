@@ -21,13 +21,32 @@ const Btn = styled.button`
   }
 `
 
+const WhiteBtn = styled(Btn)`
+  background-color: #fff;
+  color: #5A80C9;
+  border: 3px solid #5A80C9;
+
+  &:hover {
+    background-color: #5A80C9;
+    color: #fff;
+    border: 3px solid #fff;
+  }
+`
+
 function Button(props) {
-  const { text } = props;
+  const { text, addBtn } = props;
   return (
     <div>
-      <Btn className='cursor-pointer'>
-        {text}
-      </Btn>
+      {
+        addBtn ? 
+        <WhiteBtn className='cursor-pointer'>
+          {text}
+        </WhiteBtn>
+        :
+        <Btn className='cursor-pointer'>
+          {text}
+        </Btn>
+      }
     </div>
   );
 }
