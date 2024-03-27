@@ -23,8 +23,8 @@ const Store = styled.div`
   }
 
   p {
-    font-size: 20px;
-    font-weight: 700;
+    font-size: 19px;
+    font-weight: 600;
     padding: 0;
   }
 
@@ -36,19 +36,19 @@ const Store = styled.div`
 `;
 
 function StoreItem(props) {
-  const { storeImg, storeTitle, storeFavorite, store } = props
+  const { storeImg, storeTitle, storeLocal, storeFavorite, store } = props
 
   const dispatch = useDispatch();
 
-  console.log(store);
+  // console.log(store);
 
   return (
     <div>
       <Store>
         <img src={storeImg} />
-        <p>{storeTitle}</p>
+        <p>[{storeLocal}] {storeTitle}</p>
 
-        {
+        {/* {
           storeFavorite ? 
           <AiFillHeart 
             className='cursor-pointer' 
@@ -58,7 +58,7 @@ function StoreItem(props) {
             className='cursor-pointer' 
             onClick={() => dispatch(isClickedFavorite(store))}  
           />
-        }
+        } */}
       </Store>
     </div>
   );
