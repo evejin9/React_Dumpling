@@ -36,12 +36,11 @@ const Store = styled.div`
 `;
 
 function StoreItem(props) {
-
-  const { storeImg, storeTitle, store } = props
+  const { storeImg, storeTitle, storeLocal, storeFavorite, store } = props
 
   const dispatch = useDispatch();
 
-  console.log(store);
+  // console.log(store);
 
   return (
     <div>
@@ -50,9 +49,6 @@ function StoreItem(props) {
         <p>[{storeLocal}] {storeTitle}</p>
 
         {/* {
-        <p>{storeTitle}</p>
-
-        {
           storeFavorite ? 
           <AiFillHeart 
             className='cursor-pointer' 

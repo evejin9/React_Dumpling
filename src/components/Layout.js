@@ -273,6 +273,10 @@ function Layout(props) {
             <li>PRODUCT REVIEW</li>
             {/* <li>ADD</li> */}
           </ul>
+
+          <Button addBtn={'addBtn'} text={'ADD'} />
+          <Button text={'Sign In'} />
+          {/* <Button text={'Register'} /> */}
         </Nav>
       </Header>
 
@@ -308,6 +312,47 @@ function Layout(props) {
           Mandu, I Like It. All Rights Reserved.
         </p>
       </Footer>
+
+      <FavoriteBtn
+        className='cursor-pointer'
+        onClick={clickModal}
+      >
+        <FaBookmark />
+      </FavoriteBtn>
+
+      <FavoriteModal
+        ShowModal={ShowModal}
+      >
+        <div className='favoriteBg'>
+          <IoMdClose 
+            className='closeBtn cursor-pointer'
+            onClick={clickModal}
+          />
+
+          <div className='favoriteText'>
+            <h2>내가 좋아할 만두</h2>
+            <p>당신이 찜한 만두를 여기에 모았습니다.</p>
+          </div>
+
+          <div className='favotiteList'>
+            {
+              storeList.map((store) => {
+                if (store.favorite) {
+                  return <StoreItem key={store.id} storeImg={store.imagePath} storeTitle={store.title} storeFavorite={store.favorite} storeLocal={store.local} store={store} />
+                }
+              })
+            }
+          </div>
+        </div>
+      </FavoriteModal>
+
+      <BackToTopBtn 
+        className='cursor-pointer'
+        onClick={MoveToTop}
+        ShowButton={ShowButton}
+      >
+        <IoIosArrowUp />
+      </BackToTopBtn>
     </LayoutWrapper>
   );
 }

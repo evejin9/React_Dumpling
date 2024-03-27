@@ -38,7 +38,7 @@ function Button(props) {
   return (
     <div>
       {
-        addBtn ?  
+        addBtn ? 
         <WhiteBtn className='cursor-pointer'>
           {text}
         </WhiteBtn>
